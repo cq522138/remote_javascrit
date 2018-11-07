@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote TV</title>
+</head>
+<body>
+<script>
+    var Television = function (chanel,volume,status) {
+        this.chanel = chanel;
+        this.volume = volume;
+        this.status = status;
+
+        this.turnOnTV = function () {
+            this.status = true;
+            alert("Television turn on");
+            console.log(this.status);
+
+        }
+        
+        this.turnOffTV = function () {
+            alert("Television turn off");
+            this.status = false;
+        }
+        this.getChanel = function () {
+            return this.chanel;
+        }
+
+        this.changeChanel = function (new_chanel) {
+            new_chanel = prompt("Input a chanel");
+            this.chanel = new_chanel;
+        }
+
+        this.increaseVolume = function () {
+            this.volume += 1;
+            console.log(this.volume);
+        }
+
+        this.descreaseVolume = function () {
+            this.volume -= 1;
+            console.log(this.volume);
+        }
+
+        this.getVolume = function () {
+            return this.volume;
+        }
+
+        this.getStatus = function () {
+            return this.status;
+        }
+    }
+    
+
+    var Remote = function (code) {
+        this.code = code;
+        this.television = null;
+        
+        this.turnOnRemote = function () {
+            this.television.turnOnTV();
+            console.log(this.television);
+        }
+
+        this.turnOffRemote = function () {
+            this.television.turnOffTV();
+        }
+        
+        this.remoteChanel = function () {
+            if (this.television.getStatus()) {
+                this.television.changeChanel();
+                alert("You are watching chanel " +this.television.getChanel());
+            } else
+                alert("TV is turing off. Please Turn on your televison");
+        }
+
+        this.inscreaseVolumeRemote = function () {
+            this.television.increaseVolume();
+        }
+
+        this.descreaseVolumeRemote = function () {
+            this.television.descreaseVolume();
+        }
+
+        this.setTelevision = function (_television) {
+            this.television = _television;
+        }
+    }
+
+var remote1 = new Remote(10);
+var television1 = new Television(1,0,false);
+remote1.setTelevision(television1);
+
+function turnOnTV() {
+    remote1.turnOnRemote();
+}
+
+function turnOffTV() {
+    remote1.turnOffRemote();
+}
+
+function changeChanelTV () {
+    remote1.remoteChanel();
+}
+
+function increaseVolume() {
+    remote1.inscreaseVolumeRemote();
+}
+
+function decreaseVolume() {
+    remote1.descreaseVolumeRemote();
+}
+
+function statusTV() {
+    alert("Chanel " +television1.getChanel() +" - Volume " +television1.getVolume());
+}
+</script>
+
+<button type="button" onclick="turnOnTV()">Turn on TV</button>
+<button type="button" onclick="turnOffTV()">Turn off TV</button>
+<button type="button" onclick="changeChanelTV()">Change chanel</button>
+<button type="button" onclick="increaseVolume()">Increase volume</button>
+<button type="button" onclick="decreaseVolume()">decrease volume</button>
+<button type="button" onclick="statusTV()">Status TV</button>
+</body>
+</html>
